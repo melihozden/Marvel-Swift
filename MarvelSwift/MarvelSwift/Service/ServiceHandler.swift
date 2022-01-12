@@ -26,7 +26,7 @@ class ServiceHandler{
                     completion(characterList)
                 }
             }
-        }
+        }.resume()
     }
     
 }
