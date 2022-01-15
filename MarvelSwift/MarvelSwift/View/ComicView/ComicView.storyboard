@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--ComicVC-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="ComicVC" id="Y6W-OH-hqX" customClass="ComicVC" customModule="MarvelSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SrX-x2-r6D">
+                                <rect key="frame" x="50" y="289" width="314" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="thZ-xI-2eb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DC5-ye-efL">
+                                <rect key="frame" x="40" y="344" width="334" height="115"/>
+                                <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequatum.</string>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6xL-YO-h6T">
+                                <rect key="frame" x="107" y="54" width="200" height="225"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="225" id="Tb8-by-usR"/>
+                                    <constraint firstAttribute="width" constant="200" id="gqI-3M-CKX"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="SrX-x2-r6D" secondAttribute="trailing" constant="50" id="GZT-c4-atu"/>
+                            <constraint firstItem="DC5-ye-efL" firstAttribute="top" secondItem="SrX-x2-r6D" secondAttribute="bottom" constant="10" id="PnZ-sP-nEl"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="DC5-ye-efL" secondAttribute="trailing" constant="40" id="U8h-87-SEs"/>
+                            <constraint firstItem="SrX-x2-r6D" firstAttribute="top" secondItem="6xL-YO-h6T" secondAttribute="bottom" constant="10" id="XG4-s8-580"/>
+                            <constraint firstItem="6xL-YO-h6T" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="dT6-OZ-ODw"/>
+                            <constraint firstItem="SrX-x2-r6D" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="50" id="fB0-BE-BHR"/>
+                            <constraint firstItem="DC5-ye-efL" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="40" id="gmi-3S-Mqc"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6xL-YO-h6T" secondAttribute="trailing" constant="107" id="i2B-lL-Toq"/>
+                            <constraint firstItem="6xL-YO-h6T" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="107" id="lYZ-gQ-DOm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="comicDesc" destination="DC5-ye-efL" id="tcq-0L-VtF"/>
+                        <outlet property="comicImageView" destination="6xL-YO-h6T" id="J76-Ny-Kzm"/>
+                        <outlet property="comicTitleLabel" destination="SrX-x2-r6D" id="LdK-1M-xOH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="96.428571428571431"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

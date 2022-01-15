@@ -8,5 +8,6 @@
 import Foundation
 
 struct Comic : Codable{
-    let comicName : String
+    let returned : Int?
+    let collectionURI : String?
 }

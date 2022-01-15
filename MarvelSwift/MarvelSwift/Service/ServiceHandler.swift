@@ -6,27 +6,32 @@
 //
 
 import Foundation
+import Alamofire
 
 class ServiceHandler{
     
-    func getCharacters(url: URL, completion: @escaping([Character]?) -> ()){
+    let marvelApi = MarvelApi()
+    
+    func getCharacters(completion: @escaping ([Character]?) -> ()){
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        guard let url = URL(string: "\(marvelApi.baseUrl)/v1/public/characters?&ts=\(marvelApi.timeStamp)&apikey=\(marvelApi.apiKey)&hash=\(marvelApi.hashKey)") else { return}
+        
+        Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON { response in
             
-            if let error = error {
-                print(error.localizedDescription)
-                completion(nil)
-            }
-            else if let data = data {
-            
-                let characterList = try? JSONDecoder().decode([Character].self,from: data)
-                print(characterList ?? "")
-                
-                if let characterList = characterList{
-                    completion(characterList)
+            do{
+                if(response.result.isSuccess){
+                    let result = try JSONDecoder().decode(ResponseModel.self, from: response.data!)
+                    
+                    completion(result.data?.results)
                 }
-            }
-        }.resume()
+                }catch{
+                    print(response.error ?? "Error")
+                }
+        }
+    }
+    
+    func getComicsById(_ id:String, completion: @escaping ([Comic]?) -> ()){
+        
     }
     
 }
