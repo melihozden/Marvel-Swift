@@ -8,8 +8,6 @@
 import UIKit
 
 class CharacterCell: UICollectionViewCell {
-    
     @IBOutlet weak var characterImageView: UIImageView!
     @IBOutlet weak var characterTitleLabel: UILabel!
-    
 }

@@ -25,6 +25,7 @@ class MainVC: UIViewController {
         setupUI()
         setupNavBar()
         
+        // Design CollectionView cells
         let design:UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         let width = self.collectionView.frame.size.width    // for iPhone 13 it's 414
         
@@ -89,10 +90,6 @@ class MainVC: UIViewController {
 }
 
 extension MainVC: UICollectionViewDelegate,UICollectionViewDataSource{
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.characterListViewModel?.numberOfCharacters() ?? 0

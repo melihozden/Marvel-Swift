@@ -30,8 +30,21 @@ class ServiceHandler{
         }
     }
     
-    func getComicsById(_ id:String, completion: @escaping ([Comic]?) -> ()){
+    func getComicsById(_ id:Int, completion: @escaping ([CharacterComic]?) -> ()){
+        guard let url = URL(string: "\(marvelApi.baseUrl)/v1/public/characters/\(id)/comics?&ts=\(marvelApi.timeStamp)&apikey=\(marvelApi.apiKey)&hash=\(marvelApi.hashKey)") else { return}
         
+        Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON { response in
+            
+            do{
+                if(response.result.isSuccess){
+                    let result = try JSONDecoder().decode(ComicResponseModel.self, from: response.data!)
+                    
+                    completion(result.data?.results)
+                }
+                }catch{
+                    print(response.error ?? "Error")
+                }
+        }
     }
     
 }

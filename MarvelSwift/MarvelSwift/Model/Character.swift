@@ -13,6 +13,5 @@ struct Character : Codable {
     let name : String?
     let description : String?
     let thumbnail : ThumbnailModel?
-    
     let comics : Comic?
 }

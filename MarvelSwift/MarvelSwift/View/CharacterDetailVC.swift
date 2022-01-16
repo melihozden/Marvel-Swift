@@ -10,16 +10,16 @@ import SDWebImage
 
 class CharacterDetailVC: UIViewController {
     
+    private var comicListViewModel : ComicListViewModel!
     var reuseIdentifier = "ComicCell" // Cell identifier
-    lazy var comicVC = UIStoryboard(name: "ComicView", bundle: nil).instantiateViewController(withIdentifier: "ComicVC")
     
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var imageView: UIImageView!
-    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var imageContentView: UIView!
+    
     var selectedCharacter : CharacterViewModel?
     
     override func viewDidLoad() {
@@ -32,7 +32,7 @@ class CharacterDetailVC: UIViewController {
         collectionView.dataSource = self
         
         setupUI()
-        
+        getComics()
     }
     
     func setupUI(){
@@ -57,26 +57,41 @@ class CharacterDetailVC: UIViewController {
         descriptionLabel.sizeToFit()
     }
     
+    // MARK: - Service
+    func getComics(){
+        
+        ServiceHandler().getComicsById(selectedCharacter?.character.id ?? 0) { comics in
+            
+            if let comics = comics {
+                self.comicListViewModel = ComicListViewModel(comicList: comics)
+               
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            }
+        }
+    }
 }
 
 extension CharacterDetailVC: UICollectionViewDelegate,UICollectionViewDataSource{
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
-    }
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return self.comicListViewModel?.numberOfComics() ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let comicViewController = ComicVC()
+        let storyboard = UIStoryboard(name: "ComicView", bundle: nil)
+        let comicVC = storyboard.instantiateViewController(withIdentifier: "comicVC") as! ComicVC
+        
+        let selectedComic = self.comicListViewModel?.comicAtIndex(indexPath.row)
+        comicVC.selectedComic = selectedComic
         
         if #available(iOS 15.0, *) {
             if let sheet = comicVC.sheetPresentationController{
                 sheet.detents = [
-                    .medium()
+                    .medium(),
+                    .large()
                 ]
                 
                 sheet.prefersGrabberVisible = true
@@ -84,22 +99,21 @@ extension CharacterDetailVC: UICollectionViewDelegate,UICollectionViewDataSource
                 self.present(comicVC, animated: true, completion: nil)
             }
         } else {
-            // Fallback on earlier versions
+            // Earlier versions
         }
-        
-        print(indexPath.row)
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ComicCell
+        let comic = self.comicListViewModel?.comicList[indexPath.row]
+        let imageString = (comic?.thumbnail?.path)!+"."+(comic?.thumbnail?.extensionType)!
+        
+        cell.imageView.sd_setImage(with: URL(string: imageString), placeholderImage: UIImage(named: ""), options: .continueInBackground, completed: nil)
         cell.imageView.contentMode = .scaleAspectFill
         cell.imageView.layer.cornerRadius = 32
         cell.imageView.layer.borderColor = UIColor.white.cgColor
         cell.imageView.layer.borderWidth = 2
-        
-        
         
         return cell
     }
