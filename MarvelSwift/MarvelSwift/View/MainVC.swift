@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import NVActivityIndicatorView
 
 class MainVC: UIViewController {
 
@@ -72,6 +73,10 @@ class MainVC: UIViewController {
     // MARK: - Service
     func getCharacters(){
         
+        let indicator = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 90, height: 90), type: .ballRotateChase, color: .smokeWhite, padding: 0)
+        view.addSubview(indicator)
+        indicator.center = self.view.center
+        indicator.startAnimating()
         ServiceHandler().getCharacters{ characters in
             
             if let characters = characters {
@@ -80,7 +85,7 @@ class MainVC: UIViewController {
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
-                
+                indicator.stopAnimating()
             }
             
         }

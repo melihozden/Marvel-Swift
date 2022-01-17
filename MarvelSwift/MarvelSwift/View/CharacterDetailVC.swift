@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import NVActivityIndicatorView
 
 class CharacterDetailVC: UIViewController {
     
@@ -19,6 +20,7 @@ class CharacterDetailVC: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var imageContentView: UIView!
+    @IBOutlet weak var indicatorView: NVActivityIndicatorView!
     
     var selectedCharacter : CharacterViewModel?
     
@@ -60,6 +62,10 @@ class CharacterDetailVC: UIViewController {
     // MARK: - Service
     func getComics(){
         
+        indicatorView.type = .ballRotateChase
+        indicatorView.color = .smokeWhite
+       
+        indicatorView.startAnimating()
         ServiceHandler().getComicsById(selectedCharacter?.character.id ?? 0) { comics in
             
             if let comics = comics {
@@ -68,6 +74,7 @@ class CharacterDetailVC: UIViewController {
                 DispatchQueue.main.async {
                     self.collectionView.reloadData()
                 }
+                self.indicatorView.stopAnimating()
             }
         }
     }

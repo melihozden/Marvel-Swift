@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="uy0-IX-qlE">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -148,6 +147,15 @@
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 </collectionViewFlowLayout>
+                                                <view key="backgroundView" contentMode="scaleToFill" ambiguous="YES" id="mhp-mu-62c" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="354" height="75"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="90" id="9BH-QC-RGZ"/>
+                                                        <constraint firstAttribute="width" constant="90" id="nL8-63-LtO"/>
+                                                    </constraints>
+                                                </view>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ComicCell" id="hfw-Pc-R20" customClass="ComicCell" customModule="MarvelSwift" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="1.5" width="72" height="72"/>
@@ -227,6 +235,7 @@
                         <outlet property="descriptionLabel" destination="MQo-m7-KnE" id="Kbh-lN-wca"/>
                         <outlet property="imageContentView" destination="1Dr-Fl-ao4" id="xRN-hX-jR5"/>
                         <outlet property="imageView" destination="4i7-o9-StI" id="4aO-ja-6Ov"/>
+                        <outlet property="indicatorView" destination="mhp-mu-62c" id="YAz-n7-hM9"/>
                         <outlet property="titleLabel" destination="sbh-9p-LA2" id="Yxk-gz-ELa"/>
                     </connections>
                 </viewController>
